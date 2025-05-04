@@ -1,0 +1,14 @@
+CREATE TABLE Employe (ID int(10) NOT NULL AUTO_INCREMENT, NotificationID int(10) NOT NULL, InformationPersonnelleID int(10) NOT NULL, Nom varchar(255), Matricule varchar(255), PRIMARY KEY (ID));
+CREATE TABLE ChangementBeneficiaire (ID int(10) NOT NULL AUTO_INCREMENT, ConsultantRHID int(10) NOT NULL, EmployeID int(10) NOT NULL, Ancien_beneficiare varchar(255), Nouveau_beneficiaire varchar(255), Date_changement date, PRIMARY KEY (ID));
+CREATE TABLE ConsultantRH (ID int(10) NOT NULL AUTO_INCREMENT, Nom varchar(255), PRIMARY KEY (ID));
+CREATE TABLE InformationPersonnelle (ID int(10) NOT NULL AUTO_INCREMENT, Addresse varchar(255), Tel varchar(255), Email varchar(255), DateNais date, Cin varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Beneficiaire (ID int(10) NOT NULL AUTO_INCREMENT, ChangementBeneficiaireID int(10) NOT NULL, Nom varchar(255), LienParente varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Notification (ID int(10) NOT NULL AUTO_INCREMENT, ConsultantRHID int(10) NOT NULL, Notification varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Compagniesuurance (ID int(10) NOT NULL AUTO_INCREMENT, NotificationID int(10) NOT NULL, Id_compagnie varchar(255), Nom_compagnie varchar(255), Adresse_compagnie varchar(255), PRIMARY KEY (ID));
+ALTER TABLE ChangementBeneficiaire ADD CONSTRAINT FKChangement833024 FOREIGN KEY (EmployeID) REFERENCES Employe (ID);
+ALTER TABLE Employe ADD CONSTRAINT FKEmploye106903 FOREIGN KEY (InformationPersonnelleID) REFERENCES InformationPersonnelle (ID);
+ALTER TABLE ChangementBeneficiaire ADD CONSTRAINT FKChangement536895 FOREIGN KEY (ConsultantRHID) REFERENCES ConsultantRH (ID);
+ALTER TABLE Notification ADD CONSTRAINT FKNotificati307102 FOREIGN KEY (ConsultantRHID) REFERENCES ConsultantRH (ID);
+ALTER TABLE Compagniesuurance ADD CONSTRAINT FKCompagnies901288 FOREIGN KEY (NotificationID) REFERENCES Notification (ID);
+ALTER TABLE Beneficiaire ADD CONSTRAINT FKBeneficiai888246 FOREIGN KEY (ChangementBeneficiaireID) REFERENCES ChangementBeneficiaire (ID);
+ALTER TABLE Employe ADD CONSTRAINT FKEmploye415181 FOREIGN KEY (NotificationID) REFERENCES Notification (ID);
